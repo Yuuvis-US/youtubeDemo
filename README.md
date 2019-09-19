@@ -10,7 +10,7 @@ Python 2.7
 ```
 You should see the Python version that is currently installed on your Mac, you still need to update the version to the newest version Python 3.7 or higher for this tutorial.
 
-For Windows you will need download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
+For Windows and to update your current version of Python on MAC you will need download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 2. The next important tool you will need is "pip", Start by checking if you have it instaled aready by runing in the command line
 ```

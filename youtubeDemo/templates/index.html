@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>yuuvis® youtube video</title>
+   </head>
+  <style>
+  body{
+    background-color:aqua;
+    margin:50px;
+  }
+  h2{
+    margin-top:100px;
+    color:black;
+  }
+  .container{
+    display:flex;
+    margin-bottom:50px;
+  }
+  #logo{
+    width:10%;
+    height:auto;
+    margin-right:10%;
+  }
+  .button-success {
+    background: rgb(28, 184, 65);
+    color: white;
+    border-radius: 4px;
+    width:200px;
+    margin-top:10px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#searchQuarry{
+  margin:auto;
+   height:200px;
+    font-size:14pt;
+    width:50%;
+}
+.input2{
+  width:24.7%;
+  margin-top:10px;
+}
+.output-box{
+  height:500px;
+  width:400px;
+  background-color:white;
+}
+.downloadSection{
+  margin-left:250px;
+  margin-top:-150px;
+}
+  </style>
+  <body>
+  <div class="container" >
+    <img id="logo"src="..\static\icon yuuvis® turq positive rgb.jpg"\>
+    <h1> yuuvis® youtube video</h1>
+    <a href="{{ url_for('about') }}">Homepage</a>
+  </div>
+
+  <form class="pure-form">
+    <lable>Search Quarry</lable>
+    <input type="text" class="input"id="searchQuarry">
+    <br/>
+    <lable>Skip Count</lable>
+    <input type="text" class="input2">
+    <lable>Max Count</lable>
+    <input type="text" class="input2">
+    <br/>
+    <button type="submit" class="button-success ">Search</button>
+</form>
+  <h2>Search results</h2>
+  <div class="container">
+    <output class="output-box"></output> 
+    <div class="downloadSection">
+    <h2>Download Here</h2>
+    <button type="submit" class="button-success">Download/Export</button>
+    </div>
+  </div>
+ 
+
+
+
+  </body>
+</html>

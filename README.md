@@ -3,7 +3,7 @@
 
 This houses the Python yuuvis youtube demo.  
 
-1. You will need to have Python 3.7 or higher installed on your machine first. You can also download it here if not [https://www.python.org/downloads/](https://www.python.org/downloads/)
+1. You will need to have Python 3.7 or higher installed on your machine first. You can also download it here if not valready installed. [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 2. Next you will need to download Flask1.1.1 using the link provied. [https://pypi.org/project/Flask/](https://pypi.org/project/Flask/)
 

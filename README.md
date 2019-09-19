@@ -5,7 +5,7 @@ This houses the Python yuuvis youtube demo.
 
 1. You will need to have Python 3.7 or higher installed on your machine first. But how do you know if you already have it or not? Well on MAC's it is alreadyu installed so you can simply open up your favorite Terminal and type.
 ```
-$ python --Version
+$ python --version
 Python 2.7 
 ```
 You should see the python version that is currently installed on your Mac, you still need to update the version to the newest version Python 3.7 or higher.

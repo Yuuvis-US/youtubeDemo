@@ -12,9 +12,18 @@ You should see the python version that is currently installed on your Mac, you s
 
 For Windows you will need download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
-2. Next you will need to download Flask1.1.1 using the link provied and following the steps.  [https://pypi.org/project/Flask/](https://pypi.org/project/Flask/)
+2. The next important tool you will need is "pip", Start by checking if you have it instaled aready by runing in the command line
+```
+$pip -V
 
-3. Getting stared you will then open your Python IDE or in the respected repository you will need to open the Command line and run the python file "yuuvis_demo_site.py." From there you can view it at "127.0.0.1" in your Chrome browser. 
+pip 19.1.1 from c:\users\james\appdata\local\programs\python\python37-32\lib\site-packages\pip (python 3.7)
+
+```
+If you don't already have it then you can head over to [https://pip.pypa.io/en/stable/installing/](https://pip.pypa.io/en/stable/installing/) and follow the step provided. Pip is what you will use in Python to download any packages or bundle that you may need to add to your machine. It's a similar package manager to NPM or BRRW for installing packages.
+
+3. Next you will need to download Flask1.1.1 using the link provied and following the steps.  [https://pypi.org/project/Flask/](https://pypi.org/project/Flask/)
+
+4. Getting stared you will then open your Python IDE or in the respected repository you will need to open the Command line and run the python file "yuuvis_demo_site.py." From there you can view it at "127.0.0.1" in your Chrome browser. 
 
 
 

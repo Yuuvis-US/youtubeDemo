@@ -1,7 +1,7 @@
 # yuuvis® Youtube Demo
 
 
-This houses the Python yuuvis youtube demo.  
+This houses the Python yuuvis® youtube demo.  
 
 1. You will need to have Python 3.7 or higher installed on your machine first. But how do you know if you already have it or not? Well on MAC's it is already installed so you can simply open up your favorite Terminal and type.
 ```

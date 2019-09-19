@@ -14,7 +14,7 @@ For Windows you will need download it from [https://www.python.org/downloads/](h
 
 2. The next important tool you will need is "pip", Start by checking if you have it instaled aready by runing in the command line
 ```
-$pip -V
+$ pip -V
 
 pip 19.1.1 from c:\users\james\appdata\local\programs\python\python37-32\lib\site-packages\pip (python 3.7)
 

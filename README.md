@@ -1,5 +1,7 @@
 # yuuvis® Youtube Demo
-This houses the yuuvis youtube demo It is ran with Python.  
+
+
+This houses the Python yuuvis youtube demo.  
 
 1. You will need to have Python 3.7 or higher installed on your machine first. You can also download it here if not [https://www.python.org/downloads/](https://www.python.org/downloads/)
 

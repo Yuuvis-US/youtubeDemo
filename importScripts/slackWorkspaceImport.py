@@ -1,6 +1,7 @@
 import os
-from os.path import isfile, isdir, join
+from os.path import isfile, isdir, join, basename
 import json
+from datetime import datetime, timedelta, timezone
 
 #establish export file structure
 slackExportRootFolderPath = "../input/" + os.listdir("../input/").pop()+"/"
@@ -20,6 +21,9 @@ for channelDir in channelDirs:
 #print(inputJsonFilePaths)
 
 #play around a bit
+
+epoch = datetime(1601, 1, 1)
+
 class Message:
     def __init__(self, author, text, createdAt, channel, attachments):
         self.author = author
@@ -37,12 +41,21 @@ class Attachment:
 for channelDir in channelDirs:
     print('gathering messages for channel '+channelDir)
     for chatLogFile in inputJsonFilePaths[channelDir]:
+        date = basename(chatLogFile).split('.')[0]
+        print("date: "+ date)
+
         with open(chatLogFile, 'r') as inputFile:
+
             testSlackChatLog = json.load(inputFile)
 
             messages = []
             for x in testSlackChatLog:
-                message = Message(x['user'], x['text'], x['ts'], channelDir, [])
+                timestamp = (epoch + timedelta(microseconds = float(x['ts'])))
+                time = timestamp.time().strftime("%H:%M:%S")
+
+                createdAt = date+"T"+time
+
+                message = Message(x['user'], x['text'], createdAt, channelDir, [])
                 if 'files' in x:
                     fileAttachments = []
                     for file in x['files']:

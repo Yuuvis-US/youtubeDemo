@@ -2,23 +2,29 @@ import os
 from os.path import isfile, isdir, join, basename
 import json
 from datetime import datetime, timedelta, timezone
+import requests
+
+key = ""
+header_dict = {}
+header_dict['Ocp-Apim-Subscription-Key'] = key
+
 
 #establish export file structure
-slackExportRootFolderPath = "../input/" + os.listdir("../input/").pop()+"/"
-slackExportRootFiles = os.listdir(slackExportRootFolderPath)
+slack_export_root_folder_path = "../input/" + os.listdir("../input/").pop()+"/"
+slack_export_root_files = os.listdir(slack_export_root_folder_path)
 
-metaFiles = [f for f in slackExportRootFiles if isfile(join(slackExportRootFolderPath, f))]
-channelDirs = [f for f in slackExportRootFiles if isdir(join(slackExportRootFolderPath, f))]
+meta_files = [f for f in slack_export_root_files if isfile(join(slack_export_root_folder_path, f))]
+channel_dirs = [f for f in slack_export_root_files if isdir(join(slack_export_root_folder_path, f))]
 
 #retrieve file paths for each channel
-inputJsonFilePaths = {}
-for channelDir in channelDirs:
-    inputJsonFilePaths[channelDir] = []
-    channelDirPath = join(slackExportRootFolderPath, channelDir)
-    for inputFileName in os.listdir(channelDirPath):
-        inputJsonFilePaths[channelDir].append(join(channelDirPath, inputFileName))
+input_json_file_paths = {}
+for channel_dir in channel_dirs:
+    input_json_file_paths[channel_dir] = []
+    channel_dirPath = join(slack_export_root_folder_path, channel_dir)
+    for input_file_name in os.listdir(channel_dirPath):
+        input_json_file_paths[channel_dir].append(join(channel_dirPath, input_file_name))
 
-#print(inputJsonFilePaths)
+#print(input_json_file_paths)
 
 #play around a bit
 
@@ -38,31 +44,89 @@ class Attachment:
         self.type = type
         self.url = url
 
-for channelDir in channelDirs:
-    print('gathering messages for channel '+channelDir)
-    for chatLogFile in inputJsonFilePaths[channelDir]:
-        date = basename(chatLogFile).split('.')[0]
-        print("date: "+ date)
 
-        with open(chatLogFile, 'r') as inputFile:
 
-            testSlackChatLog = json.load(inputFile)
+for channel_dir in channel_dirs:
+    messages = []
+    print('gathering messages for channel '+channel_dir)
+    for chat_log_file in input_json_file_paths[channel_dir]:
+        date = basename(chat_log_file).split('.')[0]
 
-            messages = []
-            for x in testSlackChatLog:
+        with open(chat_log_file, 'r') as inputFile:
+
+            test_slack_chat_log = json.load(inputFile)
+            for x in test_slack_chat_log:
                 timestamp = (epoch + timedelta(microseconds = float(x['ts'])))
                 time = timestamp.time().strftime("%H:%M:%S")
 
                 createdAt = date+"T"+time
 
-                message = Message(x['user'], x['text'], createdAt, channelDir, [])
+                message = Message(x['user'], x['text'], createdAt, channel_dir, [])
                 if 'files' in x:
-                    fileAttachments = []
+                    file_attachments = []
                     for file in x['files']:
-                        fileAttachments.append(Attachment(file['name'], file['mimetype'], file['url_private_download']))
-                    message.attachments = fileAttachments
+                        file_attachments.append(Attachment(file['name'], file['mimetype'], file['url_private_download']))
+                    message.attachments = file_attachments
                 messages.append(message)
+    print('importing '+str(len(messages))+ ' messages')
+    for message in messages:
+        #create message object
+        message_object = {}
+        message_properties = {}
+        message_properties["enaio:objectTypeId"] = {"value": "message"}
+        message_properties["author"] = {"value": message.author}
+        message_properties["text"] = {"value": message.text}
+        message_properties["createdAt"] = {"value": message.createdAt}
+        message_properties["numOfAttachments"] = {"value": len(message.attachments)}
+        message_object["properties"] = message_properties
 
-            for message in messages:
-                print(message.author, message.text, message.createdAt)
-                print(message.attachments)
+        #import message object
+        request_body_message = {
+            'data': ('message.json', json.dumps({'objects': [message_object]}), 'application/json')
+        }
+
+        response_message = requests.post("https://api.yuuvis.io/dms/objects", files = request_body_message, headers=header_dict)
+        response_message_json = response_message.json()
+
+        if len(message.attachments)>0 :
+            message_id = response_message_json['objects'][0]['properties']['enaio:objectId']['value']
+            #create attachment objects objects if attachments exist
+            attachment_ids = []
+            for attachment in message.attachments:
+                attachment_object = {}
+                attachment_properties = {}
+                attachment_properties["enaio:objectTypeId"] = {"value": "attachment"}
+                attachment_properties["createdAt"] = {"value": message.createdAt}
+                attachment_properties["Name"] = {"value": attachment.name}
+                attachment_properties["text"] = {"value": message.text}
+                attachment_properties["author"] = {"value": message.author}
+                attachment_properties["messageId"] = {"value": message_id} #TODO
+                attachment_object["properties"] = attachment_properties
+
+                attachment_object["contentStreams"] = [{
+                    "fileName": attachment.name,
+                    "mimeType": attachment.type,
+                    "cid": "cid_63apple"
+                }]
+
+                #import attachment object
+                response_attachment_file = requests.get(attachment.url)
+                request_body_attachment = {
+                    'data': ('attachment.json', json.dumps({'objects': [attachment_object]}), 'application/json'),
+                    'cid_63apple': (attachment.name, response_attachment_file.content , attachment.type)
+                }
+
+                response_attachment = requests.post("https://api.yuuvis.io/dms/objects", files = request_body_attachment, headers = header_dict)
+                response_attachment_json = response_attachment.json()
+                attachment_ids.append(response_attachment_json['objects'][0]['properties']['enaio:objectId']['value'])
+
+            #update message object with references to attachment objects
+            message_properties["attachmentIds"] = {"value": attachment_ids}
+            message_object["properties"] = message_properties
+            header_dict_update_metadata = header_dict
+            header_dict_update_metadata['Content-Type'] = "application/json"
+            response_message_update = requests.post(
+                str("https://api.yuuvis.io/dms/objects/"+message_id),
+                data = json.dumps({'objects': [message_object]}),
+                headers = header_dict_update_metadata)
+    #print(messages)

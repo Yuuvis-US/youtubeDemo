@@ -12,6 +12,12 @@
       <cardinality>single</cardinality>
       <required>true</required>
   </propertyStringDefinition>
+  <propertyIntegerDefinition>
+      <id>numOfAttachments</id>
+      <propertyType>integer</propertyType>
+      <cardinality>single</cardinality>
+      <required>true</required>
+  </propertyIntegerDefinition>
   <propertyDateTimeDefinition>
       <id>createdAt</id>
       <propertyType>datetime</propertyType>
@@ -24,19 +30,27 @@
       <cardinality>single</cardinality>
       <required>true</required>
   </propertyStringDefinition>
+  <propertyStringDefinition>
+      <id>attachmentIds</id>
+      <propertyType>string</propertyType>
+      <cardinality>multi</cardinality>
+      <required>false</required>
+  </propertyStringDefinition>
   <typeDocumentDefinition>
       <id>message</id>
       <baseId>enaio:document</baseId>
       <propertyReference>author</propertyReference>
       <propertyReference>text</propertyReference>
       <propertyReference>createdAt</propertyReference>
+      <propertyReference>numOfAttachments</propertyReference>
+      <propertyReference>attachmentIds</propertyReference>
       <contentStreamAllowed>notallowed</contentStreamAllowed>
   </typeDocumentDefinition>
   <typeDocumentDefinition>
       <id>attachment</id>
       <baseId>enaio:document</baseId>
       <propertyReference>Name</propertyReference>
-      <propertyReference>text</propertyReference>
+      <propertyReference>messageId</propertyReference>
       <propertyReference>createdAt</propertyReference>
       <contentStreamAllowed>required</contentStreamAllowed>
   </typeDocumentDefinition>

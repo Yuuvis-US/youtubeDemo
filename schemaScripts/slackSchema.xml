@@ -37,6 +37,7 @@
       <baseId>enaio:document</baseId>
       <propertyReference>Name</propertyReference>
       <propertyReference>text</propertyReference>
+      <propertyReference>createdAt</propertyReference>
       <contentStreamAllowed>required</contentStreamAllowed>
   </typeDocumentDefinition>
 </schema>

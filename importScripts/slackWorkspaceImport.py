@@ -6,6 +6,7 @@ import requests
 
 key = ""
 header_dict = {}
+
 header_dict['Ocp-Apim-Subscription-Key'] = key
 
 
@@ -77,16 +78,22 @@ for channel_dir in channel_dirs:
         message_properties["author"] = {"value": message.author}
         message_properties["text"] = {"value": message.text}
         message_properties["createdAt"] = {"value": message.createdAt}
-        message_properties["numOfAttachments"] = {"value": len(message.attachments)}
+        message_properties["numOfAttachments"] = {"value": str(len(message.attachments))}
         message_object["properties"] = message_properties
 
+
         #import message object
+
         request_body_message = {
             'data': ('message.json', json.dumps({'objects': [message_object]}), 'application/json')
         }
 
+
         response_message = requests.post("https://api.yuuvis.io/dms/objects", files = request_body_message, headers=header_dict)
         response_message_json = response_message.json()
+        if response_message.status_code == 422:
+            print({'objects': [message_object]})
+            print(response_message.content)
 
         if len(message.attachments)>0 :
             message_id = response_message_json['objects'][0]['properties']['enaio:objectId']['value']
@@ -121,12 +128,12 @@ for channel_dir in channel_dirs:
                 attachment_ids.append(response_attachment_json['objects'][0]['properties']['enaio:objectId']['value'])
 
             #update message object with references to attachment objects
-            message_properties["attachmentIds"] = {"value": attachment_ids}
-            message_object["properties"] = message_properties
-            header_dict_update_metadata = header_dict
-            header_dict_update_metadata['Content-Type'] = "application/json"
-            response_message_update = requests.post(
-                str("https://api.yuuvis.io/dms/objects/"+message_id),
-                data = json.dumps({'objects': [message_object]}),
-                headers = header_dict_update_metadata)
+            #message_properties["attachmentIds"] = {"value": attachment_ids}
+            #message_object["properties"] = message_properties
+            #header_dict_update_metadata = header_dict
+            #header_dict_update_metadata['Content-Type'] = "application/json"
+            #response_message_update = requests.post(
+                #str("https://api.yuuvis.io/dms/objects/"+message_id),
+                #data = json.dumps({'objects': [message_object]}),
+                #headers = header_dict_update_metadata)
     #print(messages)

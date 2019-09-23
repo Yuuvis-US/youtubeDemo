@@ -30,12 +30,6 @@
       <cardinality>single</cardinality>
       <required>true</required>
   </propertyStringDefinition>
-  <propertyStringDefinition>
-      <id>attachmentIds</id>
-      <propertyType>string</propertyType>
-      <cardinality>multi</cardinality>
-      <required>false</required>
-  </propertyStringDefinition>
   <typeDocumentDefinition>
       <id>message</id>
       <baseId>enaio:document</baseId>

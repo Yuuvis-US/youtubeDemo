@@ -10,7 +10,7 @@ paramDict = {}
 baseUrl = 'https' + '://' + 'api.yuuvis.io'
 
 headerDict['Content-Type'] = 'application/json'
-headerDict['Ocp-Apim-Subscription-Key'] = '47daefb18a974163a9fbc388d36a97ae'
+headerDict['Ocp-Apim-Subscription-Key'] = 'your_API_Key_Here'
 
 session = requests.Session()
 

@@ -10,7 +10,7 @@ paramDict = {}
 baseUrl = 'https' + '://' + 'api.yuuvis.io'
 
 headerDict['Content-Type'] = 'application/json'
-headerDict['Ocp-Apim-Subscription-Key'] = '47daefb18a974163a9fbc388d36a97ae'
+headerDict['Ocp-Apim-Subscription-Key'] = '22f06d56c0224827989540a84ba46056'
 
 session = requests.Session()
 
@@ -25,17 +25,30 @@ def getvalue():
     search_query = request.form.get('search_query')
     max_count = request.form.get('max_count')
     skip_count = request.form.get('skip_count')
-    
+
     print(search_query,max_count,skip_count)
 
-    return render_template('index.html', search_query=search_query, max_count=max_count, skip_count=skip_count)
-    
+    QueryDict = {
+        "query": {
+          "statement": search_query,
+          "skipCount": skip_count,
+          "maxItems": max_count
+        }
+      }
+    print(QueryDict)
+
+    response = session.post(str(baseUrl+'/dms/objects/search'), data=json.dumps(QueryDict), headers=headerDict)
+    print(response.content)
+
+
+    return render_template('index.html', response = response.content)
+
 
 # function that make the search call
 @app.route("/")
 def SearchCall():
     search_query, max_count, skip_count = getvalue()
-   
+
     QueryDict = {
     "query": {
       "statement": search_query,
@@ -45,8 +58,7 @@ def SearchCall():
   }
     print(QueryDict)
 
-    response = session.post(str(baseUrl+'/dms/objects/search'), data=QueryDict, headers=headerDict)
-    print(response.json())
+    print(response.content)
     return render_template('index.html', response = response.json())
 
 

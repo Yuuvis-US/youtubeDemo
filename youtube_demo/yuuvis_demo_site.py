@@ -1,21 +1,25 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import requests
 import json
 
 
 app = Flask(__name__)
 
-headerDict = {}
-paramDict = {}
-baseUrl = 'https' + '://' + 'api.yuuvis.io'
+header_dict = {}
+param_dict = {}
+base_url = 'https' + '://' + 'api.yuuvis.io'
 
-headerDict['Content-Type'] = 'application/json'
-headerDict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
+header_dict['Content-Type'] = 'application/json'
+header_dict['Ocp-Apim-Subscription-Key'] = '22f06d56c0224827989540a84ba46056'
 
 session = requests.Session()
 
+output_text = ""
+
+objectId = ""
+
 # function that starts the html page
-@app.route("/")
+@app.route("/getRendition")
 def main():
     return render_template ('index.html')
 
@@ -28,43 +32,45 @@ def getvalue():
 
     # print(search_query,max_count,skip_count)
 
-    QueryDict = {
+    query_dict = {
         "query": {
           "statement": search_query,
           "skipCount": skip_count,
           "maxItems": max_count
         }
-      }
-    # print(QueryDict)
+    }
+    # print(query_dict)
 
-    response = session.post(str(baseUrl+'/dms/objects/search'), data=json.dumps(QueryDict), headers=headerDict)
-    # print(response.content)
+    import_response = session.post(str(base_url+'/dms/objects/search'), data=json.dumps(query_dict), headers=header_dict)
+
+    import_response_json = import_response.json()
+    matched_objects = import_response_json['objects']
+
+    output_text = ""
+
+    for match in matched_objects:
+        objectId = 	match['properties']['enaio:objectId']['value']
+        createdAt = match['properties']['enaio:creationDate']['value']
+        resultLine = objectId + "\n" + "\t created at:" + createdAt +"\n"
+        print(resultLine)
+        output_text += resultLine
+
+    return render_template('index.html', response = output_text)
 
 
-    return render_template('index.html', response = response.content)
-    
-    
 
 
 @app.route("/", methods=['GET'])
-def getNewValue():
-      
-      headerDict = {}
-      paramDict = {}
-      baseUrl = 'https' + '://' + 'api.yuuvis.io'
-      
-      headerDict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
-      
-      objectId = request.form('objectId')
-      print("something", objectId)
-      session = requests.Session()
-      response = session.get(str(baseUrl+'/dms/objects/{objectId}/contents/renditions/text'), headers=headerDict)
-      print(response.content)
-      print(response)
+def get_text_rendition():
+    objectId = request.args.get('objectId','')
+    print("objectId: ", objectId)
 
-      return render_template('index.html', response = response.content)
- 
+    session = requests.Session()
+    rendition_response = session.get(str(base_url+'/dms/objects/{objectId}/contents/renditions/text'), headers=header_dict)
+    rendition_response_content = rendition_response.content
+    print(rendition_response_content)
+
+    return render_template('index.html', response = rendition_response_content)
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=80)
-    
-

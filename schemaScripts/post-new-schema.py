@@ -1,11 +1,11 @@
 import requests
 
 key = ""
-baseUrl = 'https' + '://' + 'api.yuuvis.io'
+base_url = 'https' + '://' + 'api.yuuvis.io'
 
-headerDict = {}
-headerDict['Ocp-Apim-Subscription-Key'] = key
-headerDict['Content-Type'] = "application/xml"
+header_dict = {}
+header_dict['Ocp-Apim-Subscription-Key'] = key
+header_dict['Content-Type'] = "application/xml"
 
-response = requests.post(str(baseUrl+'/admin/schema'), data = open('slackSchema.xml', 'rb'), headers = headerDict)
+response = requests.post(str(base_url+'/admin/schema'), data = open('slackSchema.xml', 'rb'), headers = header_dict)
 print(response.status_code)

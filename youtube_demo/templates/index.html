@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>yuuvis® youtube video</title>
    </head>
-   
+
    <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">"
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <style>
-  body{ 
+  body{
     max-width:100%;
     margin:auto;
-    
+
   }
  pre{
    color:white;
@@ -73,15 +73,16 @@
   color:black;
   overflow:scroll;
   border: 1.5px solid rgb(46, 55, 60);
+  white-space: pre-wrap;
 }
 .downloadSection{
   margin-left:50%;
 
 }
-.footer{ 
+.footer{
   width:100%;
   height:200px;
-  background-color:#004b69; 
+  background-color:#004b69;
   -webkit-clip-path: polygon(0 87%, 100% 70%, 100% 100%, 0 99%);
   clip-path: polygon(0 75%, 100% 30%, 100% 100%, 0 99%);
 }
@@ -92,8 +93,8 @@
     <img id="logo"src="../static/icon-logo.svg"\>
     <h1 class="title"> yuuvis® youtube video</h1>
   </div>
- 
-  
+
+
 
 <form name="passdata"  action"." method="post" class="pure-form">
   <div class="container">
@@ -112,28 +113,28 @@
     </div>
   </div>
 </form>
-  
-  
- 
+
+
+
   <div class="container">
     <div class="row ">
       <div class="col">
         <h6 class="title-2">Search results</h6>
         <output class="output-box">
-        
+
          {{ response }}
-   
-        </output> 
+
+        </output>
       </div>
-        <form name="downloadSection" action"." method="get" class="pur-from">
+        <form name="downloadSection" action"./rendition" method="get" class="pure-from">
           <div class="col">
             <h6 class="title-2">Download/Export</h6>
-            <input name="objectId" type="text" placeholder="Download" />
+            <input name="objectId" id="oid" type="text" placeholder="Download" />
             <button type="submit"  class="button-success">Download Text Rendition</button>
          </div>
       </form>
-      
-    
+
+
     </div>
 
 </div>

@@ -1,15 +1,15 @@
 import requests
 
 key = ""
-baseUrl = 'https' + '://' + 'api.yuuvis.io'
+base_url = 'https' + '://' + 'api.yuuvis.io'
 
-headerDict = {}
-headerDict['Ocp-Apim-Subscription-Key'] = key
+header_dict = {}
+header_dict['Ocp-Apim-Subscription-Key'] = key
 
 
-response = requests.get(str(baseUrl+'/admin/schema'), headers=headerDict)
+response = requests.get(str(base_url+'/admin/schema'), headers=header_dict)
 print(response.status_code)
 
-schemaFile = open("currentSchema.xml", "w")
-schemaFile.write(response.text)
-schemaFile.close()
+schema_file = open("currentSchema.xml", "w")
+schema_file.write(response.text)
+schema_file.close()

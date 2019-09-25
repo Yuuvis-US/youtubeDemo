@@ -32,10 +32,10 @@ for channel_dir in channel_dirs:
 epoch = datetime(1601, 1, 1)
 
 class Message:
-    def __init__(self, author, text, createdAt, channel, attachments):
+    def __init__(self, author, text, created_at, channel, attachments):
         self.author = author
         self.text = text
-        self.createdAt = createdAt
+        self.created_at = created_at
         self.channel = channel
         self.attachments = attachments
 
@@ -60,9 +60,9 @@ for channel_dir in channel_dirs:
                 timestamp = (epoch + timedelta(microseconds = float(x['ts'])))
                 time = timestamp.time().strftime("%H:%M:%S")
 
-                createdAt = date+"T"+time
+                created_at = date+"T"+time
 
-                message = Message(x['user'], x['text'], createdAt, channel_dir, [])
+                message = Message(x['user'], x['text'], created_at, channel_dir, [])
                 if 'files' in x:
                     file_attachments = []
                     for file in x['files']:
@@ -77,7 +77,7 @@ for channel_dir in channel_dirs:
         message_properties["enaio:objectTypeId"] = {"value": "message"}
         message_properties["author"] = {"value": message.author}
         message_properties["text"] = {"value": message.text}
-        message_properties["createdAt"] = {"value": message.createdAt}
+        message_properties["createdAt"] = {"value": message.created_at}
         message_properties["numOfAttachments"] = {"value": str(len(message.attachments))}
         message_object["properties"] = message_properties
 
@@ -103,11 +103,11 @@ for channel_dir in channel_dirs:
                 attachment_object = {}
                 attachment_properties = {}
                 attachment_properties["enaio:objectTypeId"] = {"value": "attachment"}
-                attachment_properties["createdAt"] = {"value": message.createdAt}
+                attachment_properties["createdAt"] = {"value": message.created_at}
                 attachment_properties["Name"] = {"value": attachment.name}
                 attachment_properties["text"] = {"value": message.text}
                 attachment_properties["author"] = {"value": message.author}
-                attachment_properties["messageId"] = {"value": message_id} #TODO
+                attachment_properties["messageId"] = {"value": message_id}
                 attachment_object["properties"] = attachment_properties
 
                 attachment_object["contentStreams"] = [{
@@ -126,14 +126,3 @@ for channel_dir in channel_dirs:
                 response_attachment = requests.post("https://api.yuuvis.io/dms/objects", files = request_body_attachment, headers = header_dict)
                 response_attachment_json = response_attachment.json()
                 attachment_ids.append(response_attachment_json['objects'][0]['properties']['enaio:objectId']['value'])
-
-            #update message object with references to attachment objects
-            #message_properties["attachmentIds"] = {"value": attachment_ids}
-            #message_object["properties"] = message_properties
-            #header_dict_update_metadata = header_dict
-            #header_dict_update_metadata['Content-Type'] = "application/json"
-            #response_message_update = requests.post(
-                #str("https://api.yuuvis.io/dms/objects/"+message_id),
-                #data = json.dumps({'objects': [message_object]}),
-                #headers = header_dict_update_metadata)
-    #print(messages)

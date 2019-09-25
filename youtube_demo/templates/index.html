@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <title>yuuvis® youtube video</title>
    </head>
-   <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
-
+   
+   <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">"
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <style>
-  body{
-    background-color:#004b69;
-    max-width:80%;
+  body{ 
+    max-width:100%;
     margin:auto;
-    margin-top:50px;
-    font-family:Rajdhani',sans-serif;;
-    font-weight:100;
-    color:#fff;
+    
   }
+ pre{
+   color:white;
+   height:0px !important;
+ }
   .container{
     display:flex;
     margin-bottom:50px;
@@ -28,17 +28,38 @@
 .row-2{
   margin-top:5%;
 }
+.nav-sec{
+  width:100%;
+  height:250px;
+  clip-path: polygon(0 0, 100% 0, 100% 20%, 0 50%);
+  background-color:#004b69;
+  display: flex;
+}
   #logo{
     width:200px;
     height:auto;
+    margin-bottom:150px;
+    margin-left:50px;
     margin-right:10%;
+  }
+  .title{
+    margin-top:20px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight:bold;
+    color:#fff;
+  }
+  .title-2{
+    color:rgb(46, 55, 60);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight:bold;
   }
   #searchQ{
     padding: 0 0 200px 0;
+    border: 1.5px solid rgb(46, 55, 60);
   }
   .button-success {
-    background: linear-gradient(160deg,#e8198b 25%,#e6007f 70%,#002d46 100%);;
-    color: white;
+    background-color: rgb(230, 0, 125);
+    color: #fff;;
     padding: 20px;
     border-radius: 4px;
     width:200px;
@@ -47,35 +68,46 @@
 }
 .output-box{
   height:400px;
-  width:125%;
+  width:400px;
   background-color:white;
   color:black;
   overflow:scroll;
+  border: 1.5px solid rgb(46, 55, 60);
 }
 .downloadSection{
   margin-left:50%;
-  
+
+}
+.footer{ 
+  width:100%;
+  height:200px;
+  background-color:#004b69; 
+  -webkit-clip-path: polygon(0 87%, 100% 70%, 100% 100%, 0 99%);
+  clip-path: polygon(0 75%, 100% 30%, 100% 100%, 0 99%);
 }
   </style>
   <body>
-  <div class="container">
-    <img id="logo"src="https://yuuvis.com/wp-content/uploads/2019/06/logo-yuuvis-byOS.svg"\>
-    <h1> yuuvis® youtube video</h1>
+  <div class="nav-sec">
 
+    <img id="logo"src="../static/icon-logo.svg"\>
+    <h1 class="title"> yuuvis® youtube video</h1>
   </div>
+ 
+  
+
 <form name="passdata"  action"." method="post" class="pure-form">
   <div class="container">
     <div class="row">
       <div class="col">
-        <h6>Search Query</h6>
+        <h6 class="title-2">Search Query</h6>
         <input name="search_query"size="88" id="searchQ" type="text" placeholder="Search Query" />
       </div>
       <div class="col">
-        <h6>Skip Count</h6>
+        <h6 class="title-2">Skip Count</h6>
         <input name="skip_count" id="skipC" type="number" placeholder="Skip Count" />
-        <h6>Max Count</h6>
+        <h6 class="title-2">Max Count</h6>
         <input name="max_count" id="maxC" type="number" placeholder="Max Count" />
-        <button type="submit"  class="button-success">Search</button>
+        <input type="submit"  class="button-success">
       </div>
     </div>
   </div>
@@ -84,24 +116,27 @@
   
  
   <div class="container">
-    <div class="row row-2">
+    <div class="row ">
       <div class="col">
-        <h6>Search results</h6>
+        <h6 class="title-2">Search results</h6>
         <output class="output-box">
-        {{ response }}
+        
+         {{ response }}
+   
         </output> 
       </div>
-      <div class="col">
-        <div class="downloadSection">
-        <h6>Download Here</h6>
-      <button type="submit" class="button-success">Download/Export</button>
-      </div>
+        <form name="downloadSection" action"." method="get" class="pur-from">
+          <div class="col">
+            <h6 class="title-2">Download/Export</h6>
+            <input name="objectId" type="text" placeholder="Download" />
+            <button type="submit"  class="button-success">Download Text Rendition</button>
+         </div>
+      </form>
+      
+    
     </div>
-  </div>
 
 </div>
- 
-
-
+<footer class="footer"></footer>
   </body>
 </html>

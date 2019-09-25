@@ -10,7 +10,7 @@ paramDict = {}
 baseUrl = 'https' + '://' + 'api.yuuvis.io'
 
 headerDict['Content-Type'] = 'application/json'
-headerDict['Ocp-Apim-Subscription-Key'] = '22f06d56c0224827989540a84ba46056'
+headerDict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
 
 session = requests.Session()
 
@@ -26,7 +26,7 @@ def getvalue():
     max_count = request.form.get('max_count')
     skip_count = request.form.get('skip_count')
 
-    print(search_query,max_count,skip_count)
+    # print(search_query,max_count,skip_count)
 
     QueryDict = {
         "query": {
@@ -35,32 +35,36 @@ def getvalue():
           "maxItems": max_count
         }
       }
-    print(QueryDict)
+    # print(QueryDict)
 
     response = session.post(str(baseUrl+'/dms/objects/search'), data=json.dumps(QueryDict), headers=headerDict)
-    print(response.content)
+    # print(response.content)
 
 
     return render_template('index.html', response = response.content)
+    
+    
 
 
-# function that make the search call
-@app.route("/")
-def SearchCall():
-    search_query, max_count, skip_count = getvalue()
+@app.route("/", methods=['GET'])
+def getNewValue():
+      
+      headerDict = {}
+      paramDict = {}
+      baseUrl = 'https' + '://' + 'api.yuuvis.io'
+      
+      headerDict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
+      
+      objectId = request.form('objectId')
+      print("something", objectId)
+      session = requests.Session()
+      response = session.get(str(baseUrl+'/dms/objects/{objectId}/contents/renditions/text'), headers=headerDict)
+      print(response.content)
+      print(response)
 
-    QueryDict = {
-    "query": {
-      "statement": search_query,
-      "skipCount": skip_count,
-      "maxItems": max_count
-    }
-  }
-    print(QueryDict)
-
-    print(response.content)
-    return render_template('index.html', response = response.json())
-
-
+      return render_template('index.html', response = response.content)
+ 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=80)
+    
+

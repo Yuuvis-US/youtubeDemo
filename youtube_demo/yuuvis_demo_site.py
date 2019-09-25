@@ -80,16 +80,16 @@ def get_text_rendition():
     print("objectId: ", object_id)
     if len(object_id) > 0:
         session = requests.Session()
-        rendition_response = session.get(str(base_url+'/dms/objects/'+object_id+'/contents/renditions/pdf'), headers=header_dict)
+        rendition_response = session.get(str(base_url+'/dms/objects/'+object_id+'/contents/renditions/text'), headers=header_dict)
         if rendition_response.status_code != 404:
             rendition_response_content = rendition_response.content
             #print(rendition_response_content)
             #download response
-            download_file = open("content.pdf", "wb")
+            download_file = open("content.text", "wb")
             download_file.write(rendition_response_content)
             download_file.close()
             #return send_file(rendition_response_content, attachment_filename="")
-            g.output_text = "successfully downloaded content of " + object_id + " as PDF"
+            g.output_text = "successfully downloaded content of " + object_id + " as Text"
         else:
             g.output_text = "could not download PDF content of " + object_id
         return render_template('index.html', response = g.output_text)

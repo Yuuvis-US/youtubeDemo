@@ -10,7 +10,7 @@ param_dict = {}
 base_url = 'https' + '://' + 'api.yuuvis.io'
 
 header_dict['Content-Type'] = 'application/json'
-header_dict['Ocp-Apim-Subscription-Key'] = '47daefb18a974163a9fbc388d36a97ae'
+header_dict['Ocp-Apim-Subscription-Key'] = ''
 
 session = requests.Session()
 
@@ -57,7 +57,7 @@ def getvalue():
                 created_at = match_properties['enaio:creationDate']['value']
                 if 'Name' in match_properties:
                     name = match_properties['Name']['value']
-                    result_line = str("objectId:\t" + object_id + "\n" + "created at:\t" + created_at + "\n" + "name: \t\t" + name + "\n")
+                    result_line = str("\n objectId:\t" + object_id + "\n" + "created at:\t" + created_at + "\n" + "name: \t\t" + name + "\n")
                     output_text += result_line
                     print(result_line)
 
@@ -91,7 +91,7 @@ def get_text_rendition():
             #return send_file(rendition_response_content, attachment_filename="")
             g.output_text = "successfully downloaded content of " + object_id + " as Text"
         else:
-            g.output_text = "could not download PDF content of " + object_id
+            g.output_text = "could not download Text content of " + object_id
         return render_template('index.html', response = g.output_text)
     else:
         if 'output_text' in g:

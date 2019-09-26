@@ -10,7 +10,7 @@ param_dict = {}
 base_url = 'https' + '://' + 'api.yuuvis.io'
 
 header_dict['Content-Type'] = 'application/json'
-header_dict['Ocp-Apim-Subscription-Key'] = ''
+header_dict['Ocp-Apim-Subscription-Key'] = '47daefb18a974163a9fbc388d36a97ae'
 
 session = requests.Session()
 
@@ -49,7 +49,7 @@ def getvalue():
         if 'objects' in search_response_json:
             matched_objects = search_response_json['objects']
 
-            output_text = ""
+            output_text = ''
 
             for match in matched_objects:
                 match_properties = match['properties']
@@ -57,12 +57,12 @@ def getvalue():
                 created_at = match_properties['enaio:creationDate']['value']
                 if 'Name' in match_properties:
                     name = match_properties['Name']['value']
-                    result_line = str(object_id + "\n" + "created at:\t" + created_at + "\n" + "name: \t\t" + name + "\n")
+                    result_line = str("objectId:\t" + object_id + "\n" + "created at:\t" + created_at + "\n" + "name: \t\t" + name + "\n")
                     output_text += result_line
                     print(result_line)
 
                 else:
-                    result_line = str(object_id + "\n" + "created at:\t" + created_at + "\n")
+                    result_line = str("objectId:" + object_id + "\n" + "created at:\t" + created_at + "\n")
                     output_text += result_line
                     print(result_line)
             g.output_text = output_text

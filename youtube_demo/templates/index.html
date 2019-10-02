@@ -4,19 +4,10 @@
     <meta charset="UTF-8">
     <title>yuuvis® youtube video</title>
    </head>
-
-   <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">"
+   
+   <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <style>
-  body{
-    max-width:100%;
-    margin:auto;
-
-  }
- pre{
-   color:white;
-   height:0px !important;
- }
   .container{
     display:flex;
     margin-bottom:50px;
@@ -25,9 +16,14 @@
   width:100%;
   margin-top:20px;
 }
-.row-2{
-  margin-top:5%;
-}
+
+ #logo{
+    width:200px;
+    height:auto;
+    margin-bottom:150px;
+    margin-left:50px;
+    margin-right:10%;
+  }
 .nav-sec{
   width:100%;
   height:250px;
@@ -35,13 +31,7 @@
   background-color:#004b69;
   display: flex;
 }
-  #logo{
-    width:200px;
-    height:auto;
-    margin-bottom:150px;
-    margin-left:50px;
-    margin-right:10%;
-  }
+ 
   .title{
     margin-top:20px;
     font-family: 'Rajdhani', sans-serif;
@@ -52,14 +42,17 @@
     color:rgb(46, 55, 60);
     font-family: 'Rajdhani', sans-serif;
     font-weight:bold;
+    margin-top:10px;
   }
+  
   #searchQ{
     padding: 0 0 200px 0;
     border: 1.5px solid rgb(46, 55, 60);
   }
-  .button-success {
-    background-color: rgb(230, 0, 125);
-    color: #fff;;
+  .button-success { 
+    background: -webkit-linear-gradient(-70deg,#e6007d 25%,#960064 70%,#960064 100%);
+    background: linear-gradient(160deg,#e6007d 25%,#960064 70%,#960064 100%);
+    color: #fff;
     padding: 20px;
     border-radius: 4px;
     width:200px;
@@ -67,18 +60,15 @@
     margin-top:10px;
 }
 .output-box{
-  height:400px;
-  width:400px;
+  height:250px;
+  width:665px;
   background-color:white;
   color:black;
   overflow:scroll;
   border: 1.5px solid rgb(46, 55, 60);
-  white-space: pre-wrap;
+  
 }
-.downloadSection{
-  margin-left:50%;
 
-}
 .footer{
   width:100%;
   height:200px;
@@ -86,58 +76,86 @@
   -webkit-clip-path: polygon(0 87%, 100% 70%, 100% 100%, 0 99%);
   clip-path: polygon(0 75%, 100% 30%, 100% 100%, 0 99%);
 }
+  @media only screen and (max-width: 989px) {
+   .button-success{
+    margin-left:.5px;
+      }
+  }
+@media only screen and (max-width:980px){
+   .title-2{
+     margin-left:14px;
+    }
+  }
+  @media only screen and (max-width:980px){
+   #skipC{
+     margin-left:14px;
+    }
+  }
+  @media only screen and (max-width:980px){
+   #maxC{
+     margin-left:14px;
+    }
+  }
+  @media only screen and (max-width:980px){
+   .button-success{
+     margin-left:10px;
+    }
+  }
+  @media only screen and (max-width:980px){
+   #oid{
+     margin-left:14px;
+    }
+  }
+  @media only screen and (max-width:980px){
+   .title-3{
+      margin-left: .5px !important;
+    }
+  }
   </style>
   <body>
   <div class="nav-sec">
-
     <img id="logo"src="../static/icon-logo.svg"\>
     <h1 class="title"> yuuvis® youtube video</h1>
   </div>
 
-
-
-<form name="passdata"  action"." method="post" class="pure-form">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h6 class="title-2">Search Query</h6>
-        <input name="search_query"size="88" id="searchQ" type="text" placeholder="Search Query" />
-      </div>
-      <div class="col">
-        <h6 class="title-2">Skip Count</h6>
-        <input name="skip_count" id="skipC" type="number" placeholder="Skip Count" />
-        <h6 class="title-2">Max Count</h6>
-        <input name="max_count" id="maxC" type="number" placeholder="Max Count" />
-        <input type="submit"  class="button-success">
+  <form name="passdata"  action"." method="post" class="pure-form">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h6 class="title-2 title-3">Search Query</h6>
+          <input name="search_query"size="88" id="searchQ" type="text" value="SELECT * FROM enaio:object" />
+        </div>
+        <div class="input2">
+          <h6 class="title-2">Skip Count</h6>
+          <input name="skip_count" id="skipC" type="number" value="0"  />
+          <h6 class="title-2">Max Count</h6>
+          <input name="max_count" id="maxC" type="number" value="5"  />
+          </br>
+          <input type="submit"  class="button-success">
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 
 
 
-  <div class="container">
-    <div class="row ">
-      <div class="col">
-        <h6 class="title-2">Search results</h6>
-        <output class="output-box">
-
-         {{ response }}
-
-        </output>
-      </div>
-        <form name="downloadSection" action"./rendition" method="get" class="pure-from">
-          <div class="col">
-            <h6 class="title-2">Download/Export</h6>
-            <input name="objectId" id="oid" type="text" placeholder="Download" />
-            <button type="submit"  class="button-success">Download Text Rendition</button>
-         </div>
-      </form>
-
-
+<div class="container">
+  <div class="row ">
+    <div class="col">
+      <h6 class="title-2 title-3">Search results</h6>
+      <p class="output-box">
+      {{ response }}
+      </p>
     </div>
-
-</div>
-<footer class="footer"></footer>
+    <form name="downloadSection" action"./rendition" method="get" class="pure-from">
+      <div>
+        <h6 class="title-2">Download/Export</h6>
+        <input name="objectId" id="oid" type="text" placeholder="Download" />
+        </br>
+        <button type="submit"  class="button-success">Download Text Rendition</button>
+      </div>
+    </form>
+<footer class="footer">  
+</footer>
   </body>
 </html>

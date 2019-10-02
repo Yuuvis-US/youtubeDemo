@@ -7,6 +7,12 @@
       <required>true</required>
   </propertyStringDefinition>
   <propertyStringDefinition>
+      <id>name</id>
+      <propertyType>string</propertyType>
+      <cardinality>single</cardinality>
+      <required>true</required>
+  </propertyStringDefinition>
+  <propertyStringDefinition>
       <id>text</id>
       <propertyType>string</propertyType>
       <cardinality>single</cardinality>
@@ -40,7 +46,7 @@
   <typeDocumentDefinition>
       <id>attachment</id>
       <baseId>enaio:document</baseId>
-      <propertyReference>Name</propertyReference>
+      <propertyReference>name</propertyReference>
       <propertyReference>messageId</propertyReference>
       <contentStreamAllowed>required</contentStreamAllowed>
       <secondaryObjectTypeId>slackSecondary</secondaryObjectTypeId>

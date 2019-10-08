@@ -1,6 +1,6 @@
 import requests
 
-key = ""
+key = "Your_API_Key_Here"
 base_url = 'https' + '://' + 'api.yuuvis.io'
 
 header_dict = {}

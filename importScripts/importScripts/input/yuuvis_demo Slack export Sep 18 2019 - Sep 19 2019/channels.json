@@ -1,0 +1,90 @@
+[
+    {
+        "id": "CN4MRKYQ2",
+        "name": "random",
+        "created": "1568862437",
+        "creator": "UNHFA6G5T",
+        "is_archived": false,
+        "is_general": false,
+        "members": [
+            "UN6185GAF",
+            "UNHFA6G5T"
+        ],
+        "topic": {
+            "value": "Non-work banter and water cooler conversation",
+            "creator": "UNHFA6G5T",
+            "last_set": "1568862437"
+        },
+        "purpose": {
+            "value": "A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.",
+            "creator": "UNHFA6G5T",
+            "last_set": "1568862437"
+        }
+    },
+    {
+        "id": "CN4MRL4H0",
+        "name": "youtube",
+        "created": "1568862438",
+        "creator": "UNHFA6G5T",
+        "is_archived": false,
+        "is_general": false,
+        "members": [
+            "UN6185GAF",
+            "UNHFA6G5T"
+        ],
+        "topic": {
+            "value": "",
+            "creator": "",
+            "last_set": "0"
+        },
+        "purpose": {
+            "value": "",
+            "creator": "",
+            "last_set": "0"
+        }
+    },
+    {
+        "id": "CNBP4GYEM",
+        "name": "important_docs",
+        "created": "1568904005",
+        "creator": "UN6185GAF",
+        "is_archived": false,
+        "is_general": false,
+        "members": [
+            "UN6185GAF",
+            "UNHFA6G5T"
+        ],
+        "topic": {
+            "value": "",
+            "creator": "",
+            "last_set": "0"
+        },
+        "purpose": {
+            "value": "document sharing",
+            "creator": "UN6185GAF",
+            "last_set": "1568904005"
+        }
+    },
+    {
+        "id": "CNKAZRBP1",
+        "name": "general",
+        "created": "1568862437",
+        "creator": "UNHFA6G5T",
+        "is_archived": false,
+        "is_general": true,
+        "members": [
+            "UN6185GAF",
+            "UNHFA6G5T"
+        ],
+        "topic": {
+            "value": "Company-wide announcements and work-based matters",
+            "creator": "UNHFA6G5T",
+            "last_set": "1568862437"
+        },
+        "purpose": {
+            "value": "This channel is for workspace-wide communication and announcements. All members are in this channel.",
+            "creator": "UNHFA6G5T",
+            "last_set": "1568862437"
+        }
+    }
+]

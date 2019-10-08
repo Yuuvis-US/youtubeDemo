@@ -10,7 +10,7 @@ param_dict = {}
 base_url = 'https' + '://' + 'api.yuuvis.io'
 
 header_dict['Content-Type'] = 'application/json'
-header_dict['Ocp-Apim-Subscription-Key'] = ''
+header_dict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
 
 session = requests.Session()
 
@@ -39,7 +39,7 @@ def getvalue():
     }
     print(query_dict)
 
-    search_response = session.post(str(base_url+'/dms/objects/search'), data=json.dumps(query_dict), headers=header_dict)
+    search_response = session.post(str(base_url+'/dms-core/objects/search'), data=json.dumps(query_dict), headers=header_dict)
 
     status = search_response.status_code
     print(status)
@@ -80,7 +80,7 @@ def get_text_rendition():
     print("objectId: ", object_id)
     if len(object_id) > 0:
         session = requests.Session()
-        rendition_response = session.get(str(base_url+'/dms/objects/'+object_id+'/contents/renditions/text'), headers=header_dict)
+        rendition_response = session.get(str(base_url+'/dms-view/objects/'+object_id+'/contents/renditions/text'), headers=header_dict)
         if rendition_response.status_code != 404:
             rendition_response_content = rendition_response.content
             #print(rendition_response_content)

@@ -1,0 +1,65 @@
+[
+    {
+        "user": "UN6185GAF",
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1568904005.000200",
+        "text": "<@UN6185GAF> has joined the channel"
+    },
+    {
+        "user": "UN6185GAF",
+        "type": "message",
+        "subtype": "channel_purpose",
+        "ts": "1568904005.000300",
+        "text": "<@UN6185GAF> set the channel purpose: document sharing",
+        "purpose": "document sharing"
+    },
+    {
+        "user": "UNHFA6G5T",
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1568904005.000500",
+        "text": "<@UNHFA6G5T> has joined the channel",
+        "inviter": "UN6185GAF"
+    },
+    {
+        "type": "message",
+        "text": "",
+        "files": [
+            {
+                "id": "FN5CJ38H0",
+                "created": 1568904022,
+                "timestamp": 1568904022,
+                "name": "cnn_gaz_trackking.pdf",
+                "title": "cnn_gaz_trackking.pdf",
+                "mimetype": "application\/pdf",
+                "filetype": "pdf",
+                "pretty_type": "PDF",
+                "user": "UN6185GAF",
+                "editable": false,
+                "size": 899931,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TN617LEFM-FN5CJ38H0\/cnn_gaz_trackking.pdf?t=xoxe-754041694531-765761434196-753452885922-0e25085b403727aa9a3ec5ea8495ff75",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TN617LEFM-FN5CJ38H0\/download\/cnn_gaz_trackking.pdf?t=xoxe-754041694531-765761434196-753452885922-0e25085b403727aa9a3ec5ea8495ff75",
+                "thumb_pdf": "https:\/\/files.slack.com\/files-tmb\/TN617LEFM-FN5CJ38H0-96bca1ce1a\/cnn_gaz_trackking_thumb_pdf.png?t=xoxe-754041694531-765761434196-753452885922-0e25085b403727aa9a3ec5ea8495ff75",
+                "thumb_pdf_w": 935,
+                "thumb_pdf_h": 1210,
+                "permalink": "https:\/\/yuuvisdemo.slack.com\/files\/UN6185GAF\/FN5CJ38H0\/cnn_gaz_trackking.pdf",
+                "permalink_public": "https:\/\/slack-files.com\/TN617LEFM-FN5CJ38H0-a7543b28fd",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UN6185GAF",
+        "display_as_bot": false,
+        "ts": "1568904023.000600",
+        "client_msg_id": "bed53e6b-d6a0-4024-91b1-451c8a0c7c3d"
+    }
+]

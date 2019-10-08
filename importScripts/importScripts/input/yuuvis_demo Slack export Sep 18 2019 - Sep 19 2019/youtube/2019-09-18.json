@@ -1,0 +1,16 @@
+[
+    {
+        "user": "UNHFA6G5T",
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1568862438.000200",
+        "text": "<@UNHFA6G5T> has joined the channel"
+    },
+    {
+        "user": "UN6185GAF",
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1568862491.000400",
+        "text": "<@UN6185GAF> has joined the channel"
+    }
+]

@@ -5,12 +5,13 @@ import json
 
 app = Flask(__name__)
 
+key = "Your_API_Key_Here"
 header_dict = {}
 param_dict = {}
 base_url = 'https' + '://' + 'api.yuuvis.io'
 
 header_dict['Content-Type'] = 'application/json'
-header_dict['Ocp-Apim-Subscription-Key'] = 'Your_API_Key_Here'
+header_dict['Ocp-Apim-Subscription-Key'] = key
 
 session = requests.Session()
 
@@ -53,18 +54,18 @@ def getvalue():
 
             for match in matched_objects:
                 match_properties = match['properties']
-                object_id = match_properties['enaio:objectId']['value']
-                created_at = match_properties['enaio:creationDate']['value']
-                if 'Name' in match_properties:
-                    name = match_properties['Name']['value']
-                    result_line = str("\n objectId:\t" + object_id + "\n" + "created at:\t" + created_at + "\n" + "name: \t\t" + name + "\n")
-                    output_text += result_line
-                    print(result_line)
+                object_id = match_properties['system:objectId']['value']
+                #use object type system property to determine tenant prefix
+                object_type_id = match_properties['system:objectTypeId']['value']
+                tenant_prefix = object_type_id.split(':')[0]
 
-                else:
-                    result_line = str("objectId:" + object_id + "\n" + "created at:\t" + created_at + "\n")
-                    output_text += result_line
-                    print(result_line)
+                author = match_properties[(tenant_prefix+':author')]['value']
+                text = match_properties[(tenant_prefix+':text')]['value']
+
+                result_line = str("<br/> objectId: " + object_id + "<br/>author: " + author + "<br/>text: "+ text +"<br/><br/>")
+                output_text += result_line
+                print(result_line)
+
             g.output_text = output_text
         else:
             g.output_text = "no objects matched the given query."

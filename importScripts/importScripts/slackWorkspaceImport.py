@@ -76,7 +76,7 @@ for channel_dir in channel_dirs:
         #create message object
         message_object = {}
         message_properties = {}
-        message_properties["enaio:objectTypeId"] = {"value": "message"}
+        message_properties["system:objectTypeId"] = {"value": "message"}
         message_properties["author"] = {"value": message.author}
         message_properties["text"] = {"value": message.text}
         message_properties["createdAt"] = {"value": message.created_at}
@@ -89,8 +89,8 @@ for channel_dir in channel_dirs:
         request_body_message = {
             'data': ('message.json', json.dumps({'objects': [message_object]}), 'application/json')
         }
-        
-        
+
+
         response_message = requests.post("https://api.yuuvis.io/dms-core/objects", files = request_body_message, headers=header_dict)
         response_message_json = response_message.json()
 
@@ -99,13 +99,13 @@ for channel_dir in channel_dirs:
             print(response_message.content)
 
         if len(message.attachments)>0 :
-            message_id = response_message_json['objects'][0]['properties']['enaio:objectId']['value']
+            message_id = response_message_json['objects'][0]['properties']['system:objectId']['value']
             #create attachment objects objects if attachments exist
             attachment_ids = []
             for attachment in message.attachments:
                 attachment_object = {}
                 attachment_properties = {}
-                attachment_properties["enaio:objectTypeId"] = {"value": "attachment"}
+                attachment_properties["system:objectTypeId"] = {"value": "attachment"}
                 attachment_properties["createdAt"] = {"value": message.created_at}
                 attachment_properties["Name"] = {"value": attachment.name}
                 attachment_properties["text"] = {"value": message.text}
@@ -118,15 +118,14 @@ for channel_dir in channel_dirs:
                     "mimeType": attachment.type,
                     "cid": "cid_63apple"
                 }]
-                
+
                 #import attachment object
                 response_attachment_file = requests.get(attachment.url)
                 request_body_attachment = {
                     'data': ('attachment.json', json.dumps({'objects': [attachment_object]}), 'application/json'),
                     'cid_63apple': (attachment.name, response_attachment_file.content , attachment.type)
                 }
-                
+
                 response_attachment = requests.post("https://api.yuuvis.io/dms-core/objects", files = request_body_attachment, headers = header_dict)
                 response_attachment_json = response_attachment.json()
-                attachment_ids.append(response_attachment_json['objects'][0]['properties']['enaio:objectId']['value'])
-                
+                attachment_ids.append(response_attachment_json['objects'][0]['properties']['system:objectId']['value'])

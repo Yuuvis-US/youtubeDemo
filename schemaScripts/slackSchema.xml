@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<schema xmlns="http://optimal-systems.org/ns/dmscloud/schema/v4.0/">
+<schema xmlns="http://optimal-systems.org/ns/dmscloud/schema/v5.0/">
   <propertyStringDefinition>
       <id>author</id>
       <propertyType>string</propertyType>
@@ -38,14 +38,14 @@
   </propertyStringDefinition>
   <typeDocumentDefinition>
       <id>message</id>
-      <baseId>enaio:document</baseId>
+      <baseId>system:document</baseId>
       <propertyReference>numOfAttachments</propertyReference>
       <contentStreamAllowed>notallowed</contentStreamAllowed>
       <secondaryObjectTypeId>slackSecondary</secondaryObjectTypeId>
   </typeDocumentDefinition>
   <typeDocumentDefinition>
       <id>attachment</id>
-      <baseId>enaio:document</baseId>
+      <baseId>system:document</baseId>
       <propertyReference>name</propertyReference>
       <propertyReference>messageId</propertyReference>
       <contentStreamAllowed>required</contentStreamAllowed>
@@ -53,7 +53,7 @@
   </typeDocumentDefinition>
   <typeSecondaryDefinition>
       <id>slackSecondary</id>
-      <baseId>enaio:secondary</baseId>
+      <baseId>system:secondary</baseId>
       <propertyReference>author</propertyReference>
       <propertyReference>text</propertyReference>
       <propertyReference>createdAt</propertyReference>

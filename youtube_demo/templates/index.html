@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>yuuvis® youtube video</title>
    </head>
-   
+
    <link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -31,7 +31,7 @@
   background-color:#004b69;
   display: flex;
 }
- 
+
   .title{
     margin-top:20px;
     font-family: 'Rajdhani', sans-serif;
@@ -44,12 +44,12 @@
     font-weight:bold;
     margin-top:10px;
   }
-  
+
   #searchQ{
     padding: 0 0 200px 0;
     border: 1.5px solid rgb(46, 55, 60);
   }
-  .button-success { 
+  .button-success {
     background: -webkit-linear-gradient(-70deg,#e6007d 25%,#960064 70%,#960064 100%);
     background: linear-gradient(160deg,#e6007d 25%,#960064 70%,#960064 100%);
     color: #fff;
@@ -66,7 +66,7 @@
   color:black;
   overflow:scroll;
   border: 1.5px solid rgb(46, 55, 60);
-  
+
 }
 
 .footer{
@@ -123,7 +123,7 @@
       <div class="row">
         <div class="col">
           <h6 class="title-2 title-3">Search Query</h6>
-          <input name="search_query"size="88" id="searchQ" type="text" value="SELECT * FROM enaio:object" />
+          <input name="search_query"size="88" id="searchQ" type="text" value="SELECT * FROM message WHERE system:creationDate IN today()" />
         </div>
         <div class="input2">
           <h6 class="title-2">Skip Count</h6>
@@ -131,7 +131,7 @@
           <h6 class="title-2">Max Count</h6>
           <input name="max_count" id="maxC" type="number" value="5"  />
           </br>
-          <input type="submit"  class="button-success">
+          <button type="submit"  class="button-success">Submit Search Query</button>
         </div>
       </div>
     </div>
@@ -144,7 +144,9 @@
     <div class="col">
       <h6 class="title-2 title-3">Search results</h6>
       <p class="output-box">
-      {{ response }}
+      {% autoescape false %}
+        {{ response }}
+      {% endautoescape %}
       </p>
     </div>
     <form name="downloadSection" action"./rendition" method="get" class="pure-from">
@@ -155,7 +157,7 @@
         <button type="submit"  class="button-success">Download Text Rendition</button>
       </div>
     </form>
-<footer class="footer">  
+<footer class="footer">
 </footer>
   </body>
 </html>
